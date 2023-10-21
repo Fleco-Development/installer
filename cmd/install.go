@@ -10,6 +10,7 @@ import (
 	"os"
 
 	"github.com/FlecoDevelopment/installer/ui"
+	"github.com/FlecoDevelopment/installer/utils"
 	"github.com/spf13/cobra"
 )
 
@@ -57,11 +58,23 @@ var installCmd = &cobra.Command{
 
 		if systemInstallFlag && dockerInstallFlag {
 
-			installMethod = ui.NewList(listItems).(string)
+			composeInstall := utils.GetCompose()
+
+			if composeInstall == "" {
+				installMethod = "systemd"
+			} else {
+				installMethod = ui.NewList(listItems).(string)
+			}
 
 		} else if !systemInstallFlag && !dockerInstallFlag {
 
-			installMethod = ui.NewList(listItems).(string)
+			composeInstall := utils.GetCompose()
+
+			if composeInstall == "" {
+				installMethod = "systemd"
+			} else {
+				installMethod = ui.NewList(listItems).(string)
+			}
 
 		} else {
 
