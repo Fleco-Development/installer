@@ -1,0 +1,9 @@
+# build output
+build/
+
+# IDE related
+.vscode
+.idea
+
+# macOS-specific files
+.DS_Store
